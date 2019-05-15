@@ -5,11 +5,15 @@ import UserInfo from './user-info'
 import Actions from './actions'
 import Links from './links'
 
-const AppContent = ({ userinfo, repos, starred }) => (
+const AppContent = ({ userinfo, repos, starred, handleSearch, handleRepos, handleStarred }) => (
   <div className="App App-header">
-    <Search />
+    <Search handleSearch={ handleSearch }/>
     { !!userinfo && <UserInfo userinfo={ userinfo }/> }
-    { !!userinfo && <Actions /> }
+    { !!userinfo && <Actions
+      handleRepos={ handleRepos }
+      handleStarred = { handleStarred }
+    /> }
+
     { !!repos.length && <Links
       className="repos"
       title="Repositórios: "
@@ -26,8 +30,8 @@ const AppContent = ({ userinfo, repos, starred }) => (
 )
 
 AppContent.propTypes = {
-  userinfo: PropTypes.object.isRequired,
-  repos: PropTypes.array.isRequired,
-  starred: PropTypes.array.isRequired,
+  userinfo: PropTypes.object,
+  repos: PropTypes.array,
+  starred: PropTypes.array,
 }
 export default AppContent

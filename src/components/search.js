@@ -1,26 +1,20 @@
 import React from 'react';
-import Ajax from '@fdaciuk/ajax'
+import PropTypes from 'prop-types'
 
-const Search = () => (
+const Search = ({ handleSearch }) => (
   <header>
     <div className="search">
       <input
         className="App-form"
         type="search"
         placeholder="Digite o usuário"
-        onKeyUp={(e) => {
-          let user = e.target.value
-          let keyCode = e.which || e.keyCode
-          const ENTER = 13
-          if (keyCode === ENTER) {
-            Ajax().get(`https://api.github.com/users/${ user }`)
-            .then((result) => {
-              console.log(result);
-            })
-          }
-        }}
+        onKeyUp={ handleSearch }
       />
     </div>
   </header>
 )
+
+Search.propTypes = {
+  handleSearch: PropTypes.func.isRequired
+}
 export default Search
